@@ -39,11 +39,13 @@ function handleAPI(req, res) {
   if (action === "update") {
     if (key !== API_KEY) return res.json({ error: "Yetkisiz" });
     let data = readJ(SF, {});
-    const map = {
+       const map = {
       t:"temp",h:"hum",g:"gas",p:"ppm",ms:"motor_state",ls:"light_state",
       ma:"motor_auto",la:"light_auto",mr:"motor_remaining",lr:"light_remaining",
       wm:"work_min",sm:"stop_min",loh:"light_on_h",lom:"light_on_m",
-      lfh:"light_off_h",lfm:"light_off_m",gt:"gas_threshold",aq:"air_quality",
+      lfh:"light_off_h",lfm:"light_off_m",
+      gt:"gas_threshold",gth:"gas_threshold",
+      aq:"air_quality",
       ga:"gas_alarm",ns:"ntp_synced",ct:"clock_time",up:"uptime",
       cl:"calibrated",mmr:"manual_motor_rem",lmr:"manual_light_rem",
       temp:"temp",hum:"hum",gas:"gas",ppm:"ppm",
