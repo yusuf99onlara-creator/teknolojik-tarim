@@ -4,26 +4,23 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="theme-color" content="#0f172a">
-<link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌿</text></svg>">
-<link rel="manifest" href="data:application/json;base64,eyJuYW1lIjoiVGVrbm9sb2ppayBUYXJpbSIsInNob3J0X25hbWUiOiJUYXJpbSIsInN0YXJ0X3VybCI6Ii8iLCJkaXNwbGF5Ijoic3RhbmRhbG9uZSIsImJhY2tncm91bmRfY29sb3IiOiIjMGYxNzJhIiwidGhlbWVfY29sb3IiOiIjMGYxNzJhIn0=">
 <title>Teknolojik Tarim</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-:root{--bg:#0f172a;--card:rgba(30,41,59,.7);--border:rgba(148,163,184,.08);--text:#e2e8f0;--sub:#94a3b8;--dim:#64748b;--cyan:#22d3ee;--green:#22c55e;--red:#ef4444;--orange:#fb923c;--yellow:#fbbf24;--purple:#a78bfa;--safe-b:env(safe-area-inset-bottom,0px)}
-body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;min-height:100dvh;-webkit-font-smoothing:antialiased;overflow-x:hidden}
-.login-wrap{display:flex;justify-content:center;align-items:center;min-height:100vh;min-height:100dvh;padding:20px}
-.login-box{background:var(--card);border:1px solid rgba(148,163,184,.1);border-radius:20px;padding:32px 24px;width:100%;max-width:360px;text-align:center;backdrop-filter:blur(20px)}
+:root{--bg:#0f172a;--card:rgba(30,41,59,.7);--border:rgba(148,163,184,.08);--text:#e2e8f0;--sub:#94a3b8;--dim:#64748b;--cyan:#22d3ee;--green:#22c55e;--red:#ef4444;--orange:#fb923c;--yellow:#fbbf24;--purple:#a78bfa}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;-webkit-font-smoothing:antialiased}
+.login-wrap{display:flex;justify-content:center;align-items:center;min-height:100vh;padding:20px}
+.login-box{background:var(--card);border:1px solid rgba(148,163,184,.1);border-radius:20px;padding:32px 24px;width:100%;max-width:380px;text-align:center;backdrop-filter:blur(20px)}
 .login-box h1{font-size:24px;margin-bottom:6px;background:linear-gradient(135deg,var(--cyan),var(--purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
 .login-box h2{font-size:12px;color:var(--dim);margin-bottom:24px;font-weight:400}
-.login-box input{width:100%;padding:16px;background:rgba(15,23,42,.8);border:1px solid rgba(148,163,184,.15);border-radius:12px;color:var(--text);font-size:22px;text-align:center;outline:none;margin-bottom:14px;-webkit-appearance:none;letter-spacing:6px;transition:border-color .3s}
-.login-box input:focus{border-color:var(--cyan);box-shadow:0 0 0 3px rgba(34,211,238,.1)}
-.login-box button{width:100%;padding:16px;background:linear-gradient(135deg,var(--cyan),#0891b2);color:#fff;border:none;border-radius:12px;font-size:16px;font-weight:700;cursor:pointer;transition:transform .1s}
+.login-box input{width:100%;padding:16px;background:rgba(15,23,42,.8);border:1px solid rgba(148,163,184,.15);border-radius:12px;color:var(--text);font-size:22px;text-align:center;outline:none;margin-bottom:14px;-webkit-appearance:none;letter-spacing:6px}
+.login-box input:focus{border-color:var(--cyan)}
+.login-box button{width:100%;padding:16px;background:linear-gradient(135deg,var(--cyan),#0891b2);color:#fff;border:none;border-radius:12px;font-size:16px;font-weight:700;cursor:pointer}
 .login-box button:active{transform:scale(.97)}
-.login-box .er{color:var(--red);font-size:13px;margin-bottom:12px;display:none;animation:shake .5s}
-@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+.login-box .er{color:var(--red);font-size:13px;margin-bottom:12px;display:none}
 .login-box .ft{margin-top:16px;font-size:10px;color:#475569}
-.main-wrap{display:none;padding:12px 12px calc(12px + var(--safe-b))}
-.c{max-width:500px;margin:0 auto}
+.main-wrap{display:none;padding:12px}
+.c{max-width:520px;margin:0 auto}
 .hd{text-align:center;padding:16px 0 8px}
 .hd h1{font-size:20px;font-weight:800;background:linear-gradient(90deg,var(--cyan),var(--purple),var(--cyan));background-size:200% auto;-webkit-background-clip:text;-webkit-text-fill-color:transparent;animation:sh 3s linear infinite}
 .hd h2{font-size:11px;color:var(--dim);font-weight:400;margin:3px 0 6px}
@@ -34,18 +31,15 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .sd.on{background:var(--green);box-shadow:0 0 6px var(--green)}.sd.of{background:var(--red);box-shadow:0 0 6px var(--red)}
 @keyframes pu{50%{opacity:.3}}
 .ob{background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.2);border-radius:12px;padding:12px;margin-bottom:10px;text-align:center;font-size:12px;color:#fca5a5;display:none}
-.tb{display:flex;gap:2px;margin-bottom:12px;background:rgba(15,23,42,.7);border-radius:12px;padding:3px;position:sticky;top:0;z-index:50;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);overflow-x:auto;-webkit-overflow-scrolling:touch}
-.ti{flex:0 0 auto;min-width:0;padding:10px 8px;text-align:center;border-radius:9px;font-size:9px;font-weight:700;cursor:pointer;color:var(--dim);user-select:none;white-space:nowrap;transition:all .2s}
+.tb{display:flex;gap:2px;margin-bottom:12px;background:rgba(15,23,42,.7);border-radius:12px;padding:3px;position:sticky;top:0;z-index:50;backdrop-filter:blur(12px);overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.tb::-webkit-scrollbar{display:none}
+.ti{flex:1 0 auto;padding:10px 6px;text-align:center;border-radius:9px;font-size:9px;font-weight:700;cursor:pointer;color:var(--dim);user-select:none;white-space:nowrap}
 .ti.a{background:rgba(34,211,238,.12);color:var(--cyan)}
 .tc{display:none}.tc.a{display:block}
 .gr{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px}
-.cd{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:14px 8px;text-align:center;transition:transform .2s}
-.cd:active{transform:scale(.98)}
-.cd .ic{font-size:24px;margin-bottom:4px}
-.cd .vl{font-size:24px;font-weight:800}
-.cd .lb{font-size:8px;color:var(--sub);margin-top:3px;text-transform:uppercase;letter-spacing:.8px;font-weight:600}
-.cd.tm .vl{color:var(--orange)}.cd.hm .vl{color:var(--cyan)}
-.cd.gs{grid-column:1/-1}.cd.gs .vl{color:var(--purple)}
+.cd{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:14px 8px;text-align:center}
+.cd .ic{font-size:24px;margin-bottom:4px}.cd .vl{font-size:24px;font-weight:800}.cd .lb{font-size:8px;color:var(--sub);margin-top:3px;text-transform:uppercase;letter-spacing:.8px;font-weight:600}
+.cd.tm .vl{color:var(--orange)}.cd.hm .vl{color:var(--cyan)}.cd.gs{grid-column:1/-1}.cd.gs .vl{color:var(--purple)}
 .aq{display:inline-block;padding:3px 8px;border-radius:8px;font-size:9px;font-weight:700;margin-top:4px}
 .aq1{background:rgba(34,197,94,.12);color:#4ade80}.aq2{background:rgba(34,211,238,.12);color:var(--cyan)}.aq3{background:rgba(251,191,36,.12);color:var(--yellow)}.aq4{background:rgba(251,146,60,.12);color:var(--orange)}.aq5{background:rgba(239,68,68,.12);color:var(--red)}
 .gb{width:100%;height:5px;background:rgba(148,163,184,.06);border-radius:3px;margin-top:5px;overflow:hidden}
@@ -54,9 +48,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 @keyframes ap{50%{border-color:rgba(239,68,68,.6)}}
 .wn{background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.15);border-radius:12px;padding:10px;margin-bottom:10px;font-size:11px;color:#fca5a5;line-height:1.5}
 .wn-item{padding:3px 0}
-.bx{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:16px;text-align:center;margin-bottom:8px;transition:all .3s}
-.bx.r{border-color:rgba(34,197,94,.25);background:rgba(34,197,94,.03)}.bx.s{border-color:rgba(239,68,68,.15)}
-.bx.lo{border-color:rgba(251,191,36,.25);background:rgba(251,191,36,.03)}.bx.lf{border-color:rgba(100,116,139,.15)}
+.bx{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:16px;text-align:center;margin-bottom:8px}
+.bx.r{border-color:rgba(34,197,94,.25)}.bx.s{border-color:rgba(239,68,68,.15)}.bx.lo{border-color:rgba(251,191,36,.25)}.bx.lf{border-color:rgba(100,116,139,.15)}
 .mi{width:48px;height:48px;border-radius:50%;margin:0 auto 6px;display:flex;align-items:center;justify-content:center;font-size:22px}
 .mi.r{background:rgba(34,197,94,.1);border:2px solid var(--green);animation:sp 2s linear infinite}
 .mi.s{background:rgba(239,68,68,.1);border:2px solid var(--red)}
@@ -71,30 +64,30 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .pf{height:100%;border-radius:3px;transition:width 1s}.pf.r{background:var(--green)}.pf.s{background:var(--orange)}.pf.lo{background:var(--yellow)}.pf.lf{background:var(--dim)}
 .sc{display:flex;justify-content:center;gap:14px;margin-top:6px;font-size:11px}.sc-i{color:var(--sub)}.sc-i span{font-weight:700;color:var(--text)}
 .bg{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:10px}
-.bt{padding:12px;border:none;border-radius:10px;font-size:12px;font-weight:700;cursor:pointer;text-decoration:none;display:block;text-align:center;touch-action:manipulation;user-select:none;transition:transform .1s,opacity .1s}
-.bt:active{transform:scale(.95);opacity:.8}
+.bt{padding:12px;border:none;border-radius:10px;font-size:12px;font-weight:700;cursor:pointer;text-decoration:none;display:block;text-align:center;touch-action:manipulation;user-select:none}
+.bt:active{transform:scale(.95)}
 .b1{background:linear-gradient(135deg,#22c55e,#16a34a);color:#fff}.b2{background:linear-gradient(135deg,#ef4444,#dc2626);color:#fff}
 .b3{background:linear-gradient(135deg,var(--cyan),#0891b2);color:#fff}.b4{background:linear-gradient(135deg,var(--orange),#ea580c);color:#fff}
 .b5{background:linear-gradient(135deg,var(--yellow),#f59e0b);color:#000}.b6{background:linear-gradient(135deg,#64748b,#475569);color:#fff}
 .b7{background:linear-gradient(135deg,var(--purple),#7c3aed);color:#fff}.b8{background:linear-gradient(135deg,#ef4444,#991b1b);color:#fff}
+.b9{background:linear-gradient(135deg,#22c55e,#059669);color:#fff}
 .bf{grid-column:1/-1}
 .st{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:16px;margin-bottom:10px}
 .st h3{font-size:11px;color:var(--sub);margin-bottom:12px;text-align:center;text-transform:uppercase;letter-spacing:1.2px;font-weight:700}
 .ig{margin-bottom:8px}.ig label{display:block;font-size:11px;color:var(--dim);margin-bottom:4px;font-weight:600}
-.ig input,.ig select{width:100%;padding:12px;background:rgba(15,23,42,.8);border:1px solid rgba(148,163,184,.12);border-radius:10px;color:var(--text);font-size:16px;outline:none;-webkit-appearance:none;transition:border-color .3s}
-.ig input:focus,.ig select:focus{border-color:var(--cyan)}
+.ig input{width:100%;padding:12px;background:rgba(15,23,42,.8);border:1px solid rgba(148,163,184,.12);border-radius:10px;color:var(--text);font-size:16px;outline:none;-webkit-appearance:none}
+.ig input:focus{border-color:var(--cyan)}
 .tr{display:grid;grid-template-columns:1fr auto 1fr;gap:6px;align-items:end}
 .ts{font-size:20px;font-weight:800;color:var(--dim);text-align:center;padding-bottom:14px}
-.bs{width:100%;padding:12px;background:linear-gradient(135deg,#818cf8,#6366f1);color:#fff;border:none;border-radius:10px;font-size:14px;font-weight:700;cursor:pointer;margin-top:4px;transition:transform .1s}
+.bs{width:100%;padding:12px;background:linear-gradient(135deg,#818cf8,#6366f1);color:#fff;border:none;border-radius:10px;font-size:14px;font-weight:700;cursor:pointer;margin-top:4px}
 .bs:active{transform:scale(.97)}
 .ib{background:rgba(34,211,238,.06);border:1px solid rgba(34,211,238,.12);border-radius:10px;padding:10px;margin-top:8px;font-size:10px;color:var(--cyan);text-align:center;line-height:1.5}
 .ps{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:16px;margin-bottom:10px}
 .ps h3{font-size:11px;color:var(--sub);margin-bottom:12px;text-align:center;text-transform:uppercase;letter-spacing:1.2px;font-weight:700}
 .sb{width:100%;padding:12px;background:rgba(15,23,42,.8);border:1px solid rgba(148,163,184,.12);border-radius:10px;color:var(--text);font-size:16px;outline:none;margin-bottom:8px;-webkit-appearance:none}
 .sb:focus{border-color:var(--cyan)}.sb::placeholder{color:#475569}
-.pc{background:rgba(15,23,42,.3);border:1px solid rgba(148,163,184,.06);border-radius:12px;padding:12px;margin-bottom:6px;cursor:pointer;transition:all .3s}
+.pc{background:rgba(15,23,42,.3);border:1px solid rgba(148,163,184,.06);border-radius:12px;padding:12px;margin-bottom:6px;cursor:pointer}
 .pc.sel{border-color:rgba(34,211,238,.3);background:rgba(34,211,238,.04)}
-.pc:active{transform:scale(.98)}
 .pn{font-size:13px;font-weight:700;color:var(--cyan);margin-bottom:5px}
 .pg{display:grid;grid-template-columns:1fr 1fr;gap:3px}
 .pv{font-size:11px;color:var(--sub);padding:2px 0}.pv span{color:var(--text);font-weight:700}
@@ -102,23 +95,24 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .sel-badge{float:right;background:rgba(34,211,238,.15);color:var(--cyan);font-size:9px;padding:3px 8px;border-radius:8px;font-weight:700}
 .sel-info{background:rgba(34,211,238,.06);border:1px solid rgba(34,211,238,.12);border-radius:10px;padding:8px;margin-bottom:10px;font-size:10px;color:var(--cyan);text-align:center}
 .nr{text-align:center;color:#475569;font-size:13px;padding:20px}
-.guide-card{background:rgba(15,23,42,.3);border:1px solid rgba(148,163,184,.05);border-radius:12px;padding:12px;margin-bottom:7px;transition:all .3s}
+.guide-card{background:rgba(15,23,42,.3);border:1px solid rgba(148,163,184,.05);border-radius:12px;padding:12px;margin-bottom:7px}
 .guide-card h4{font-size:13px;color:var(--cyan);margin-bottom:5px;font-weight:700}
 .guide-card p{font-size:11px;color:var(--sub);line-height:1.5}
 .rp-day{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:14px;margin-bottom:8px}
-.rp-date{font-size:13px;font-weight:700;color:var(--cyan);margin-bottom:8px;display:flex;justify-content:space-between;align-items:center}
+.rp-date{font-size:13px;font-weight:700;color:var(--cyan);margin-bottom:8px;display:flex;justify-content:space-between}
 .rp-date span{font-size:10px;color:var(--dim);font-weight:400}
 .rp-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px}
 .rp-item{text-align:center;background:rgba(15,23,42,.3);border-radius:8px;padding:8px 4px}
-.rp-item .rv{font-size:16px;font-weight:800}.rp-item .rl{font-size:8px;color:var(--sub);margin-top:2px;text-transform:uppercase}
+.rp-item .rv{font-size:15px;font-weight:800}.rp-item .rl{font-size:7px;color:var(--sub);margin-top:2px;text-transform:uppercase}
 .rp-bar{display:flex;gap:4px;margin-top:8px}
 .rp-seg{flex:1;height:6px;border-radius:3px;background:rgba(148,163,184,.06)}
 .rp-seg .rp-fill{height:100%;border-radius:3px}
+.rp-extra{margin-top:8px;font-size:10px;color:var(--sub);line-height:1.6}
+.rp-extra b{color:var(--text)}
 .ft{text-align:center;padding:12px 0 16px;font-size:10px;color:#475569}
 .lo-btn{display:block;text-align:center;color:var(--dim);font-size:11px;margin-top:10px;text-decoration:none;cursor:pointer;padding:8px}
-.to{position:fixed;bottom:calc(16px + var(--safe-b));left:50%;transform:translateX(-50%) translateY(80px);background:rgba(30,41,59,.95);color:var(--cyan);padding:12px 20px;border-radius:12px;border:1px solid rgba(34,211,238,.15);font-size:12px;font-weight:600;transition:transform .3s;z-index:100;white-space:nowrap;backdrop-filter:blur(10px)}
+.to{position:fixed;bottom:16px;left:50%;transform:translateX(-50%) translateY(80px);background:rgba(30,41,59,.95);color:var(--cyan);padding:12px 20px;border-radius:12px;border:1px solid rgba(34,211,238,.15);font-size:12px;font-weight:600;transition:transform .3s;z-index:100;white-space:nowrap;backdrop-filter:blur(10px)}
 .to.sh{transform:translateX(-50%) translateY(0)}
-.section-title{font-size:12px;color:var(--sub);font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;padding-left:4px}
 </style></head><body>
 <div class="login-wrap" id="loginWrap"><div class="login-box">
 <h1>🌿 Teknolojik Tarim</h1><h2>Otomasyon Kontrol Sistemi</h2>
@@ -130,115 +124,81 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 <div class="main-wrap" id="mainWrap"><div class="c">
 <div class="hd"><h1>🌿 Teknolojik Tarim</h1><h2>Akilli Aeroponik Sistem</h2>
 <div class="ck" id="clk">--:--:--</div>
-<div class="cs"><span class="sd on" id="sDot"></span><span id="sTxt">Baglaniyor...</span> | KKTC UTC+3</div></div>
+<div class="cs"><span class="sd on" id="sDot"></span><span id="sTxt">Baglaniyor...</span> | KKTC</div></div>
 <div class="ob" id="offBanner">⚠️ ESP cevrimdisi! Son: <span id="lastUp">--</span></div>
 
 <div class="tb">
-<div class="ti a" onclick="showTab(0)">📊 Panel</div>
-<div class="ti" onclick="showTab(1)">⚙️ Motor</div>
-<div class="ti" onclick="showTab(2)">💡 Isik</div>
-<div class="ti" onclick="showTab(3)">📈 Rapor</div>
-<div class="ti" onclick="showTab(4)">🌱 Bitki</div>
-<div class="ti" onclick="showTab(5)">📖 Rehber</div>
-<div class="ti" onclick="showTab(6)">🔧 Ayar</div>
-</div>
+<div class="ti a" onclick="showTab(0)">📊Panel</div>
+<div class="ti" onclick="showTab(1)">⚙️Motor</div>
+<div class="ti" onclick="showTab(2)">💡Isik</div>
+<div class="ti" onclick="showTab(3)">📈Rapor</div>
+<div class="ti" onclick="showTab(4)">🌱Bitki</div>
+<div class="ti" onclick="showTab(5)">📖Rehber</div>
+<div class="ti" onclick="showTab(6)">🔧Ayar</div></div>
 
 <!-- PANEL -->
-<div class="tc a" id="t0">
-<div id="warns" style="display:none"></div>
+<div class="tc a" id="t0"><div id="warns" style="display:none"></div>
 <div class="gr">
 <div class="cd tm"><div class="ic">🌡️</div><div class="vl" id="tmp">--</div><div class="lb">Sicaklik °C</div></div>
 <div class="cd hm"><div class="ic">💧</div><div class="vl" id="hum">--</div><div class="lb">Nem %</div></div>
-<div class="cd gs" id="gC"><div class="ic">🌬️</div><div style="display:flex;justify-content:space-around"><div><div class="vl" id="ppm">--</div><div class="lb">PPM</div></div><div><div class="vl" style="font-size:15px;color:var(--dim)" id="gR">--</div><div class="lb">Ham</div></div></div><span class="aq" id="aB">--</span><div class="gb"><div class="gf" id="gBar"></div></div></div>
-</div>
+<div class="cd gs" id="gC"><div class="ic">🌬️</div><div style="display:flex;justify-content:space-around"><div><div class="vl" id="ppm">--</div><div class="lb">PPM</div></div><div><div class="vl" style="font-size:15px;color:var(--dim)" id="gR">--</div><div class="lb">Ham</div></div></div><span class="aq" id="aB">--</span><div class="gb"><div class="gf" id="gBar"></div></div></div></div>
 <div class="bx" id="mBx"><div class="mi" id="mI">⚙️</div><div class="mt" id="mT">--</div><span class="mb" id="mBd">--</span><div class="mn-timer" id="mmT"></div><div style="font-size:20px;font-weight:800;margin-top:5px" id="mR">--</div><div style="font-size:9px;color:var(--dim)" id="mL">Kalan</div><div class="pb"><div class="pf" id="mP"></div></div></div>
 <div class="bx" id="lBx"><div class="mi" id="lI">💡</div><div class="mt" id="lT">--</div><span class="mb" id="lBd">--</span><div class="mn-timer" id="lmT"></div><div style="font-size:20px;font-weight:800;margin-top:5px" id="lR">--</div><div style="font-size:9px;color:var(--dim)" id="lL">Kalan</div><div class="sc"><div class="sc-i">Acilis:<span id="lOn">--:--</span></div><div class="sc-i">Kapanis:<span id="lOf">--:--</span></div></div><div class="pb"><div class="pf" id="lP"></div></div></div>
-<div class="bg"><a class="bt b8 bf" href="#" onclick="return allOff()">🛑 ACIL DURDUR</a></div>
-</div>
+<div class="bg" id="emergBtns"><a class="bt b8 bf" href="#" id="emergBtn" onclick="return toggleEmerg()">🛑 ACIL DURDUR</a></div></div>
 
 <!-- MOTOR -->
 <div class="tc" id="t1">
 <div class="bx" id="mBx2"><div class="mi" id="mI2">⚙️</div><div class="mt" id="mT2">--</div><span class="mb" id="mBd2">--</span><div style="font-size:20px;font-weight:800;margin-top:5px" id="mR2">--</div><div style="font-size:9px;color:var(--dim)" id="mL2">Kalan</div><div class="pb"><div class="pf" id="mP2"></div></div></div>
-<div class="bg"><a class="bt b1" href="#" onclick="return sendCmd('mon')">▶ Motor AC</a><a class="bt b2" href="#" onclick="return sendCmd('moff')">⏹ Motor KAPAT</a><a class="bt bf" id="maB2" href="#" onclick="return sendCmd('mauto')">🔄 Otomatik Mod</a></div>
-<div class="st"><h3>⚙️ Motor Zamanlayici</h3>
-<form onsubmit="return saveMotor()">
-<div class="ig"><label>Calisma Suresi (dakika)</label><input type="number" id="wI" min="1" max="60" placeholder="3"></div>
-<div class="ig"><label>Bekleme Suresi (dakika)</label><input type="number" id="sI" min="1" max="120" placeholder="15"></div>
-<button type="submit" class="bs">💾 Kaydet</button></form>
-<div class="ib">Motor belirli araliklarla acilip kapanarak besin solusyonunu koklere puskurtur</div></div>
-</div>
+<div class="bg"><a class="bt b1" href="#" onclick="return sendCmd('mon')">▶ Motor AC</a><a class="bt b2" href="#" onclick="return sendCmd('moff')">⏹ Motor KAPAT</a><a class="bt bf" id="maB2" href="#" onclick="return sendCmd('mauto')">🔄 Otomatik</a></div>
+<div class="st"><h3>⚙️ Motor Zamanlayici</h3><form onsubmit="return saveMotor()"><div class="ig"><label>Calisma Suresi (dk)</label><input type="number" id="wI" min="1" max="60"></div><div class="ig"><label>Bekleme Suresi (dk)</label><input type="number" id="sI" min="1" max="120"></div><button type="submit" class="bs">💾 Kaydet</button></form><div class="ib">Motor ayarlanan araliklarla acilip kapanarak besin solusyonunu koklere puskurtur. Manuel modda 5dk sonra otomatige doner.</div></div></div>
 
 <!-- ISIK -->
 <div class="tc" id="t2">
 <div class="bx" id="lBx2"><div class="mi" id="lI2">💡</div><div class="mt" id="lT2">--</div><span class="mb" id="lBd2">--</span><div style="font-size:20px;font-weight:800;margin-top:5px" id="lR2">--</div><div style="font-size:9px;color:var(--dim)" id="lL2">Kalan</div><div class="sc"><div class="sc-i">Acilis:<span id="lOn2">--:--</span></div><div class="sc-i">Kapanis:<span id="lOf2">--:--</span></div></div><div class="pb"><div class="pf" id="lP2"></div></div></div>
-<div class="bg"><a class="bt b5" href="#" onclick="return sendCmd('lon')">☀️ Isik AC</a><a class="bt b6" href="#" onclick="return sendCmd('loff')">🌙 Isik KAPAT</a><a class="bt bf" id="laB2" href="#" onclick="return sendCmd('lauto')">🔄 Otomatik Mod</a></div>
-<div class="st"><h3>💡 Isik Zamanlayici</h3>
-<form onsubmit="return saveLight()">
-<div class="ig"><label>☀️ Acilma Saati</label><div class="tr"><input type="number" id="loH" min="0" max="23" placeholder="06"><div class="ts">:</div><input type="number" id="loM" min="0" max="59" placeholder="00"></div></div>
-<div class="ig"><label>🌙 Kapanma Saati</label><div class="tr"><input type="number" id="lfH" min="0" max="23" placeholder="22"><div class="ts">:</div><input type="number" id="lfM" min="0" max="59" placeholder="00"></div></div>
-<button type="submit" class="bs">💾 Kaydet</button></form>
-<div class="ib">Isiklar KKTC saatine gore otomatik acilir/kapanir. Yaprakli sebzeler icin 14-16 saat isik yeterlidir</div></div>
-</div>
+<div class="bg"><a class="bt b5" href="#" onclick="return sendCmd('lon')">☀️ Isik AC</a><a class="bt b6" href="#" onclick="return sendCmd('loff')">🌙 Isik KAPAT</a><a class="bt bf" id="laB2" href="#" onclick="return sendCmd('lauto')">🔄 Otomatik</a></div>
+<div class="st"><h3>💡 Isik Zamanlayici</h3><form onsubmit="return saveLight()"><div class="ig"><label>☀️ Acilma Saati</label><div class="tr"><input type="number" id="loH" min="0" max="23"><div class="ts">:</div><input type="number" id="loM" min="0" max="59"></div></div><div class="ig"><label>🌙 Kapanma Saati</label><div class="tr"><input type="number" id="lfH" min="0" max="23"><div class="ts">:</div><input type="number" id="lfM" min="0" max="59"></div></div><button type="submit" class="bs">💾 Kaydet</button></form><div class="ib">Isiklar NTP saatine gore otomatik acilir/kapanir. EEPROM'da saklanir.</div></div></div>
 
 <!-- RAPOR -->
-<div class="tc" id="t3">
-<div class="st"><h3>📈 Son 7 Gun Raporu</h3>
-<div id="reportArea"><div class="nr">Rapor yukleniyor...</div></div></div>
-</div>
+<div class="tc" id="t3"><div class="st"><h3>📈 Son 7 Gun Raporu</h3><div id="reportArea"><div class="nr">📊 Rapor yukleniyor...</div></div></div></div>
 
 <!-- BITKI -->
-<div class="tc" id="t4">
-<div class="ps"><h3>🌱 Bitki Secimi ve Rehber</h3>
-<div class="sel-info" id="selInfo">Panelde uyari almak icin bitkilere dokunarak sec (max 4)</div>
-<input type="text" class="sb" id="sBox" placeholder="🔍 Bitki ara..." oninput="filterPlants()">
-<div id="pL"></div></div>
-</div>
+<div class="tc" id="t4"><div class="ps"><h3>🌱 Bitki Secimi</h3><div class="sel-info" id="selInfo">Uyari almak icin bitki sec (max 4)</div><input type="text" class="sb" id="sBox" placeholder="🔍 Bitki ara..." oninput="filterPlants()"><div id="pL"></div></div></div>
 
 <!-- REHBER -->
-<div class="tc" id="t5">
-<div class="st"><h3>📖 Sistem Nasil Calisir?</h3>
-<div class="guide-card"><h4>🌐 Uzaktan Erisim</h4><p>Bu web paneli Render.com sunucusunda calisir. ESP8266 her 5 saniyede sensor verilerini sunucuya gonderir. Siz bu panelden verileri gorur ve komut gonderirsiniz. Komutlar 3-5 saniye gecikmeli iletilir.</p></div>
-<div class="guide-card"><h4>📱 Telefona Ekleme</h4><p><b>iPhone:</b> Safari'de paylas butonuna dokunun → "Ana Ekrana Ekle" secin. <b>Android:</b> Chrome'da 3 nokta menuden "Ana ekrana ekle" secin. Uygulama gibi calisir!</p></div>
-<div class="guide-card"><h4>⚙️ Motor Sistemi</h4><p>Pompalar ayarlanan araliklarda otomatik acilip kapanir (ornegin 3dk ac / 15dk kapat). Besin solusyonunu basincli puskurterek koklere ulastirir. Manuel modda 5dk sonra otomatige doner.</p></div>
-<div class="guide-card"><h4>💡 Isik Sistemi</h4><p>Spektrum LED isiklar KKTC saatine gore (NTP ile senkron) otomatik acilir/kapanir. Saat ayari EEPROM'da saklanir, elektrik gidip gelse bile hatirlanir.</p></div>
-<div class="guide-card"><h4>🌡️ Sensor Verileri</h4><p>DHT11 sicaklik ve nem olcer. MQ-135 havadaki zararli gazlari PPM olarak olcer. Veriler 2 saniyede bir guncellenir ve sunucuya gonderilir.</p></div>
-<div class="guide-card"><h4>💾 Elektrik Kesilirse?</h4><p>Tum ayarlar (motor zamanlama, isik saatleri, gaz esigi, kalibrasyon) ESP'nin EEPROM hafizasinda kalici olarak saklanir. Elektrik geldiginde NTP ile saati senkronize eder ve kaldigi yerden devam eder.</p></div>
-<div class="guide-card"><h4>🛑 Acil Durdurma</h4><p>Panel sekmesindeki kirmizi "ACIL DURDUR" butonu tum motorlari ve isiklari kapatir. Manuel moda gecer. 5 dakika sonra otomatige doner.</p></div>
-<div class="guide-card"><h4>📈 Rapor Sistemi</h4><p>Sistem her saat basinda sicaklik, nem, hava kalitesi ve cihaz durumlarini kaydeder. Son 7 gunluk rapor "Rapor" sekmesinden gorulebilir. 8. gunun verileri otomatik silinir.</p></div>
+<div class="tc" id="t5"><div class="st"><h3>📖 Nasil Calisir?</h3>
+<div class="guide-card"><h4>🌐 Uzaktan Erisim</h4><p>ESP8266 her 5 saniyede sensor verilerini Render.com sunucusuna gonderir. Bu panel uzerinden verileri gorur ve komut gonderirsiniz. Komutlar 3-5sn gecikmeli iletilir.</p></div>
+<div class="guide-card"><h4>📱 Telefona Ekleme</h4><p><b>iPhone:</b> Safari → Paylas → Ana Ekrana Ekle. <b>Android:</b> Chrome → 3 nokta → Ana ekrana ekle. Tam ekran uygulama gibi calisir!</p></div>
+<div class="guide-card"><h4>⚙️ Motor Sistemi</h4><p>Pompalar otomatik calisir (orn: 3dk ac / 15dk kapat). Manuel modda 5dk sonra otomatige doner. Acil durdurma sonrasi 5 saat bekler.</p></div>
+<div class="guide-card"><h4>💡 Isik Sistemi</h4><p>LED isiklar NTP saatine gore otomatik acilir/kapanir. Ayarlar EEPROM'da saklanir - elektrik gidip gelse hatirlanir.</p></div>
+<div class="guide-card"><h4>💾 Elektrik Kesilirse?</h4><p>Tum ayarlar EEPROM'da kalici. Elektrik gelince NTP ile saat senkronize olur ve kaldigi yerden devam eder.</p></div>
+<div class="guide-card"><h4>🛑 Acil Durdurma</h4><p>Tum sistemi kapatir. "Sistemi Geri Ac" butonu ile kaldigi yerden devam eder. Acil durdurma sonrasi 5 SAAT bekleyip otomatige doner.</p></div>
+<div class="guide-card"><h4>📈 Rapor Sistemi</h4><p>Saatlik veriler kaydedilir. 7 gunluk gecmis gorulebilir. 8. gun otomatik silinir. Sicaklik, nem, hava kalitesi, motor/isik calisma oranlari raporlanir.</p></div>
 </div></div>
 
 <!-- AYAR -->
 <div class="tc" id="t6">
-<div class="st"><h3>🌬️ Gaz Sensoru Ayarlari</h3>
-<form onsubmit="return saveGas()">
-<div class="ig"><label>Alarm Esigi (PPM)</label><input type="number" id="gI" min="50" max="2000" placeholder="400"></div>
-<button type="submit" class="bs">💾 Kaydet</button></form>
-<a class="bt b7 bf" style="margin-top:8px" href="#" onclick="return sendCmd('cal')">🔬 Sensoru Kalibre Et</a>
-<div class="ib">Kalibrasyon temiz havada yapilmalidir. 5 saniye surer. Sonuc kalici hafizada saklanir</div></div>
+<div class="st"><h3>🌬️ Gaz Sensoru</h3><form onsubmit="return saveGas()"><div class="ig"><label>Alarm Esigi (PPM)</label><input type="number" id="gI" min="50" max="2000"></div><button type="submit" class="bs">💾 Kaydet</button></form><a class="bt b7 bf" style="margin-top:8px" href="#" onclick="return sendCmd('cal')">🔬 Kalibre Et</a><div class="ib">Kalibrasyon temiz havada yapilmalidir</div></div>
 <div class="st"><h3>📡 Sistem Bilgisi</h3>
-<div class="guide-card"><p>⏱ Calisma suresi: <b id="up">--</b></p></div>
-<div class="guide-card"><p>📡 Guncelleme araligi: 5 saniye</p></div>
-<div class="guide-card"><p>🔒 Oturum: Sunucu tarafli token</p></div>
-<div class="guide-card"><p>💾 Ayarlar: EEPROM (kalici)</p></div>
-</div>
+<div class="guide-card"><p>⏱ Calisma: <b id="up">--</b></p></div>
+<div class="guide-card"><p>📡 Guncelleme: Her 2 saniye</p></div>
+<div class="guide-card"><p>🔒 Oturum: Token tabanli</p></div>
+<div class="guide-card"><p>💾 Ayarlar: EEPROM kalici</p></div></div>
 <a class="lo-btn" onclick="doLogout()">🔓 Cikis Yap</a>
-<div class="ft">Teknolojik Tarim v5.0<br>ESP8266 + Render.com</div>
-</div>
+<div class="ft">Teknolojik Tarim v5.0</div></div>
 </div></div>
 <div class="to" id="tst"></div>
 <script>
-var API='/api',fetchTimer=null,authToken='',reportLoaded=false;
-function doLogin(){var pw=document.getElementById('pwInput').value;fetch(API+'?action=login&pw='+encodeURIComponent(pw)).then(function(r){return r.json()}).then(function(d){if(d.ok&&d.token){authToken=d.token;localStorage.setItem('ttoken',d.token);document.getElementById('loginWrap').style.display='none';document.getElementById('mainWrap').style.display='block';document.getElementById('loginErr').style.display='none';document.getElementById('pwInput').value='';startApp();}else{document.getElementById('loginErr').style.display='block';}}).catch(function(){document.getElementById('loginErr').style.display='block';});}
+var API='/api',fetchTimer=null,authToken='',reportLoaded=false,emergStopped=false;
+function doLogin(){var pw=document.getElementById('pwInput').value;fetch(API+'?action=login&pw='+encodeURIComponent(pw)).then(function(r){return r.json()}).then(function(d){if(d.ok&&d.token){authToken=d.token;localStorage.setItem('ttoken',d.token);document.getElementById('loginWrap').style.display='none';document.getElementById('mainWrap').style.display='block';document.getElementById('loginErr').style.display='none';document.getElementById('pwInput').value='';startApp();}else document.getElementById('loginErr').style.display='block';}).catch(function(){document.getElementById('loginErr').style.display='block';});}
 function doLogout(){authToken='';localStorage.removeItem('ttoken');if(fetchTimer)clearInterval(fetchTimer);document.getElementById('mainWrap').style.display='none';document.getElementById('loginWrap').style.display='flex';document.getElementById('pwInput').value='';}
 document.getElementById('pwInput').addEventListener('keydown',function(e){if(e.key==='Enter')doLogin()});
-var savedToken=localStorage.getItem('ttoken');
-if(savedToken){authToken=savedToken;fetch(API+'?action=getData&token='+savedToken).then(function(r){return r.json()}).then(function(d){if(d.needLogin)doLogout();else{document.getElementById('loginWrap').style.display='none';document.getElementById('mainWrap').style.display='block';startApp();}}).catch(function(){doLogout();});}
+var st=localStorage.getItem('ttoken');if(st){authToken=st;fetch(API+'?action=getData&token='+st).then(function(r){return r.json()}).then(function(d){if(d.needLogin)doLogout();else{document.getElementById('loginWrap').style.display='none';document.getElementById('mainWrap').style.display='block';startApp();}}).catch(function(){doLogout();});}
 
-var PL=[{n:"Yesil Marul",p:"5.5-6.5",e:"0.8-1.2",l:"12-16",t:"15-22",i:"Serin sever. Kolay yetisir"},{n:"Kirmizi Marul",p:"5.5-6.5",e:"0.8-1.2",l:"14-16",t:"15-22",i:"Isik onemli"},{n:"Roka",p:"6.0-7.0",e:"0.8-1.4",l:"10-14",t:"15-20",i:"Hizli buyur"},{n:"Maydanoz",p:"5.5-6.5",e:"0.8-1.8",l:"12-16",t:"15-25",i:"Yavas cimlenir"},{n:"Nane",p:"5.5-6.5",e:"2.0-2.4",l:"12-16",t:"15-25",i:"Hizli yayilir"},{n:"Feslegen",p:"5.5-6.5",e:"1.0-1.6",l:"14-18",t:"20-30",i:"Sicak sever"},{n:"Dereotu",p:"5.5-6.5",e:"1.0-1.6",l:"12-14",t:"15-25",i:"Hizli buyur"},{n:"Tere",p:"6.0-6.5",e:"0.8-1.2",l:"12-16",t:"10-20",i:"10 gunde hasat!"},{n:"Kekik",p:"5.5-7.0",e:"0.8-1.6",l:"12-16",t:"15-25",i:"Dayanikli"},{n:"Ispanak",p:"5.5-6.5",e:"1.8-2.3",l:"10-14",t:"10-20",i:"Serin sever"},{n:"Cherry Domates",p:"5.5-6.5",e:"2.0-3.5",l:"14-18",t:"20-30",i:"Cok isik ister"},{n:"Tatli Biber",p:"5.5-6.5",e:"1.8-2.5",l:"14-18",t:"20-28",i:"Sicak sever"},{n:"Salatalik",p:"5.5-6.0",e:"1.7-2.5",l:"14-18",t:"20-28",i:"Hizli buyur"},{n:"Cilek",p:"5.5-6.2",e:"1.0-1.5",l:"12-16",t:"15-25",i:"Tozlasma gerek"},{n:"Turp",p:"6.0-7.0",e:"1.6-2.2",l:"10-14",t:"10-18",i:"3 haftada hasat!"},{n:"Brokoli",p:"6.0-6.5",e:"2.8-3.5",l:"14-18",t:"15-20",i:"Serin ortam"},{n:"Sogan Yesili",p:"6.0-7.0",e:"1.4-1.8",l:"12-14",t:"15-25",i:"En kolay"},{n:"Pazi",p:"6.0-6.5",e:"1.8-2.3",l:"12-16",t:"15-25",i:"Dayanikli"},{n:"Lahana",p:"6.0-7.0",e:"2.5-3.0",l:"12-16",t:"12-20",i:"Serin iklim"},{n:"Biberiye",p:"5.5-6.5",e:"1.0-1.6",l:"14-18",t:"15-25",i:"Uzun omurlu"}];
+var PL=[{n:"Yesil Marul",p:"5.5-6.5",e:"0.8-1.2",l:"12-16",t:"15-22",i:"Serin sever"},{n:"Kirmizi Marul",p:"5.5-6.5",e:"0.8-1.2",l:"14-16",t:"15-22",i:"Isik onemli"},{n:"Roka",p:"6.0-7.0",e:"0.8-1.4",l:"10-14",t:"15-20",i:"Hizli buyur"},{n:"Maydanoz",p:"5.5-6.5",e:"0.8-1.8",l:"12-16",t:"15-25",i:"Yavas cimlenir"},{n:"Nane",p:"5.5-6.5",e:"2.0-2.4",l:"12-16",t:"15-25",i:"Hizli yayilir"},{n:"Feslegen",p:"5.5-6.5",e:"1.0-1.6",l:"14-18",t:"20-30",i:"Sicak sever"},{n:"Dereotu",p:"5.5-6.5",e:"1.0-1.6",l:"12-14",t:"15-25",i:"Hizli buyur"},{n:"Tere",p:"6.0-6.5",e:"0.8-1.2",l:"12-16",t:"10-20",i:"10 gunde hasat!"},{n:"Kekik",p:"5.5-7.0",e:"0.8-1.6",l:"12-16",t:"15-25",i:"Dayanikli"},{n:"Ispanak",p:"5.5-6.5",e:"1.8-2.3",l:"10-14",t:"10-20",i:"Serin sever"},{n:"Cherry Domates",p:"5.5-6.5",e:"2.0-3.5",l:"14-18",t:"20-30",i:"Cok isik ister"},{n:"Tatli Biber",p:"5.5-6.5",e:"1.8-2.5",l:"14-18",t:"20-28",i:"Sicak sever"},{n:"Salatalik",p:"5.5-6.0",e:"1.7-2.5",l:"14-18",t:"20-28",i:"Hizli buyur"},{n:"Cilek",p:"5.5-6.2",e:"1.0-1.5",l:"12-16",t:"15-25",i:"Tozlasma gerek"},{n:"Turp",p:"6.0-7.0",e:"1.6-2.2",l:"10-14",t:"10-18",i:"3 haftada hasat!"},{n:"Brokoli",p:"6.0-6.5",e:"2.8-3.5",l:"14-18",t:"15-20",i:"Serin ortam"},{n:"Sogan Yesili",p:"6.0-7.0",e:"1.4-1.8",l:"12-14",t:"15-25",i:"En kolay"},{n:"Pazi",p:"6.0-6.5",e:"1.8-2.3",l:"12-16",t:"15-25",i:"Dayanikli"},{n:"Lahana",p:"6.0-7.0",e:"2.5-3.0",l:"12-16",t:"12-20",i:"Serin iklim"},{n:"Biberiye",p:"5.5-6.5",e:"1.0-1.6",l:"14-18",t:"15-25",i:"Uzun omurlu"}];
 var selPlants=JSON.parse(localStorage.getItem('sp')||'[]');
-function renderPlants(li){var h='';if(!li.length)h='<div class="nr">Bulunamadi</div>';else for(var i=0;i<li.length;i++){var x=li[i],idx=PL.indexOf(x),isSel=selPlants.indexOf(idx)>=0;h+='<div class="pc'+(isSel?' sel':'')+'" onclick="togglePlant('+idx+')">';if(isSel)h+='<span class="sel-badge">SECILI ✓</span>';h+='<div class="pn">🌱 '+x.n+'</div><div class="pg"><div class="pv">pH:<span>'+x.p+'</span></div><div class="pv">EC:<span>'+x.e+'</span></div><div class="pv">Isik:<span>'+x.l+'s</span></div><div class="pv">Sic:<span>'+x.t+'°C</span></div></div><div class="pi">💡 '+x.i+'</div></div>';}document.getElementById('pL').innerHTML=h;updateSelInfo();}
-function togglePlant(idx){var pos=selPlants.indexOf(idx);if(pos>=0)selPlants.splice(pos,1);else{if(selPlants.length>=4){showToast('En fazla 4 bitki!');return;}selPlants.push(idx);}localStorage.setItem('sp',JSON.stringify(selPlants));filterPlants();}
-function updateSelInfo(){var info=document.getElementById('selInfo');if(!selPlants.length)info.textContent='Panelde uyari almak icin bitkilere dokunarak sec (max 4)';else{var n=[];for(var i=0;i<selPlants.length;i++)n.push(PL[selPlants[i]].n);info.textContent='Secili ('+selPlants.length+'/4): '+n.join(', ');}}
+function renderPlants(li){var h='';if(!li.length)h='<div class="nr">Bulunamadi</div>';else for(var i=0;i<li.length;i++){var x=li[i],idx=PL.indexOf(x),isSel=selPlants.indexOf(idx)>=0;h+='<div class="pc'+(isSel?' sel':'')+'" onclick="togglePlant('+idx+')">';if(isSel)h+='<span class="sel-badge">✓</span>';h+='<div class="pn">🌱 '+x.n+'</div><div class="pg"><div class="pv">pH:<span>'+x.p+'</span></div><div class="pv">EC:<span>'+x.e+'</span></div><div class="pv">Isik:<span>'+x.l+'s</span></div><div class="pv">Sic:<span>'+x.t+'°C</span></div></div><div class="pi">'+x.i+'</div></div>';}document.getElementById('pL').innerHTML=h;updateSelInfo();}
+function togglePlant(idx){var pos=selPlants.indexOf(idx);if(pos>=0)selPlants.splice(pos,1);else{if(selPlants.length>=4){showToast('En fazla 4!');return;}selPlants.push(idx);}localStorage.setItem('sp',JSON.stringify(selPlants));filterPlants();}
+function updateSelInfo(){var info=document.getElementById('selInfo');if(!selPlants.length)info.textContent='Uyari almak icin bitki sec (max 4)';else{var n=[];for(var i=0;i<selPlants.length;i++)n.push(PL[selPlants[i]].n);info.textContent='Secili ('+selPlants.length+'/4): '+n.join(', ');}}
 function filterPlants(){var q=document.getElementById('sBox').value.toLowerCase();if(!q){renderPlants(PL);return;}var r=[];for(var i=0;i<PL.length;i++)if(PL[i].n.toLowerCase().indexOf(q)>=0)r.push(PL[i]);renderPlants(r);}
 renderPlants(PL);
 function showTab(n){var ts=document.querySelectorAll('.ti'),cs=document.querySelectorAll('.tc');for(var i=0;i<ts.length;i++){ts[i].classList.remove('a');cs[i].classList.remove('a');}ts[n].classList.add('a');cs[n].classList.add('a');if(n===3&&!reportLoaded)loadReport();}
@@ -246,24 +206,24 @@ function pad(n){return n<10?'0'+n:''+n}
 function fmtMin(m){var h=Math.floor(m/60),mn=m%60;return h>0?h+'s '+mn+'dk':mn+'dk'}
 function fmtAgo(s){if(s<60)return s+'sn';if(s<3600)return Math.floor(s/60)+'dk';return Math.floor(s/3600)+'sa '+Math.floor((s%3600)/60)+'dk'}
 function checkWarnings(d){var w=[];for(var i=0;i<selPlants.length;i++){var p=PL[selPlants[i]];if(!p)continue;var tr=p.t.split('-');if(d.temp<parseFloat(tr[0]))w.push('⚠️ '+p.n+': Sicaklik dusuk! (min '+tr[0]+'°C)');if(d.temp>parseFloat(tr[1]))w.push('🔥 '+p.n+': Sicaklik yuksek! (max '+tr[1]+'°C)');if(d.hum<30)w.push('💧 '+p.n+': Nem dusuk!');if(d.hum>85)w.push('💧 '+p.n+': Nem yuksek!');}return w;}
-function updateMotor(d,sfx){
-var mot=parseInt(d.motor_state)||0,ma=parseInt(d.motor_auto)||0,mr=parseInt(d.motor_remaining)||0,wm=parseInt(d.work_min)||3,sm=parseInt(d.stop_min)||15;
-var e=function(id){return document.getElementById(id+sfx)};
+
+function uM(d,s){var mot=parseInt(d.motor_state)||0,ma=parseInt(d.motor_auto)||0,mr=parseInt(d.motor_remaining)||0,wm=parseInt(d.work_min)||3,sm=parseInt(d.stop_min)||15;
+var e=function(id){return document.getElementById(id+s)};
 if(e('mR'))e('mR').textContent=fmtMin(Math.floor(mr/60));
-if(mot){if(e('mBx'))e('mBx').className='bx r';if(e('mI'))e('mI').className='mi r';if(e('mT')){e('mT').className='mt r';e('mT').textContent='MOTOR CALISIYOR';}if(e('mP'))e('mP').className='pf r';if(e('mL'))e('mL').textContent='Kapanmaya';if(e('mP'))e('mP').style.width=Math.max(0,((wm*60-mr)/(wm*60))*100)+'%';}
-else{if(e('mBx'))e('mBx').className='bx s';if(e('mI'))e('mI').className='mi s';if(e('mT')){e('mT').className='mt s';e('mT').textContent='MOTOR DURDU';}if(e('mP'))e('mP').className='pf s';if(e('mL'))e('mL').textContent='Acilmaya';if(e('mP'))e('mP').style.width=Math.max(0,((sm*60-mr)/(sm*60))*100)+'%';}
-if(ma){if(e('mBd'))e('mBd').className='mb au';if(e('mBd'))e('mBd').textContent='OTO';if(e('maB')){e('maB').textContent='🖐 Manuel';e('maB').className='bt b4 bf';}}
-else{if(e('mBd'))e('mBd').className='mb mn';if(e('mBd'))e('mBd').textContent='MANUEL';if(e('maB')){e('maB').textContent='🔄 Otomatik';e('maB').className='bt b3 bf';}}}
-function updateLight(d,sfx){
-var lit=parseInt(d.light_state)||0,la=parseInt(d.light_auto)||0,lr=parseInt(d.light_remaining)||0;
-var e=function(id){return document.getElementById(id+sfx)};
+if(mot){if(e('mBx'))e('mBx').className='bx r';if(e('mI'))e('mI').className='mi r';if(e('mT')){e('mT').className='mt r';e('mT').textContent='MOTOR CALISIYOR';}if(e('mP')){e('mP').className='pf r';e('mP').style.width=Math.max(0,((wm*60-mr)/(wm*60))*100)+'%';}if(e('mL'))e('mL').textContent='Kapanmaya';}
+else{if(e('mBx'))e('mBx').className='bx s';if(e('mI'))e('mI').className='mi s';if(e('mT')){e('mT').className='mt s';e('mT').textContent='MOTOR DURDU';}if(e('mP')){e('mP').className='pf s';e('mP').style.width=Math.max(0,((sm*60-mr)/(sm*60))*100)+'%';}if(e('mL'))e('mL').textContent='Acilmaya';}
+if(ma){if(e('mBd')){e('mBd').className='mb au';e('mBd').textContent='OTO';}if(e('maB')){e('maB').textContent='🖐 Manuel';e('maB').className='bt b4 bf';}}
+else{if(e('mBd')){e('mBd').className='mb mn';e('mBd').textContent='MANUEL';}if(e('maB')){e('maB').textContent='🔄 Otomatik';e('maB').className='bt b3 bf';}}}
+
+function uL(d,s){var lit=parseInt(d.light_state)||0,la=parseInt(d.light_auto)||0,lr=parseInt(d.light_remaining)||0;
+var e=function(id){return document.getElementById(id+s)};
 if(e('lR'))e('lR').textContent=fmtMin(lr);
 if(e('lOn'))e('lOn').textContent=pad(parseInt(d.light_on_h)||6)+':'+pad(parseInt(d.light_on_m)||0);
 if(e('lOf'))e('lOf').textContent=pad(parseInt(d.light_off_h)||22)+':'+pad(parseInt(d.light_off_m)||0);
 if(lit){if(e('lBx'))e('lBx').className='bx lo';if(e('lI'))e('lI').className='mi lo';if(e('lT')){e('lT').className='mt lo';e('lT').textContent='ISIK ACIK';}if(e('lP'))e('lP').className='pf lo';if(e('lL'))e('lL').textContent='Kapanmaya';}
 else{if(e('lBx'))e('lBx').className='bx lf';if(e('lI'))e('lI').className='mi lf';if(e('lT')){e('lT').className='mt lf';e('lT').textContent='ISIK KAPALI';}if(e('lP'))e('lP').className='pf lf';if(e('lL'))e('lL').textContent='Acilmaya';}
-if(la){if(e('lBd'))e('lBd').className='mb au';if(e('lBd'))e('lBd').textContent='OTO';if(e('laB')){e('laB').textContent='🖐 Manuel';e('laB').className='bt b4 bf';}}
-else{if(e('lBd'))e('lBd').className='mb mn';if(e('lBd'))e('lBd').textContent='MANUEL';if(e('laB')){e('laB').textContent='🔄 Otomatik';e('laB').className='bt b3 bf';}}}
+if(la){if(e('lBd')){e('lBd').className='mb au';e('lBd').textContent='OTO';}if(e('laB')){e('laB').textContent='🖐 Manuel';e('laB').className='bt b4 bf';}}
+else{if(e('lBd')){e('lBd').className='mb mn';e('lBd').textContent='MANUEL';}if(e('laB')){e('laB').textContent='🔄 Otomatik';e('laB').className='bt b3 bf';}}}
 
 function fetchData(){
 fetch(API+'?action=getData&token='+authToken+'&_='+Date.now()).then(function(r){return r.json()}).then(function(d){
@@ -284,47 +244,62 @@ gb.style.background=ppmV<200?'#22c55e':ppmV<400?'#fbbf24':ppmV<600?'#fb923c':'#e
 parseInt(d.gas_alarm)?document.getElementById('gC').classList.add('al'):document.getElementById('gC').classList.remove('al');
 var w=checkWarnings({temp:temp,hum:hum}),wDiv=document.getElementById('warns');
 if(w.length){wDiv.innerHTML='<div class="wn">'+w.map(function(x){return'<div class="wn-item">'+x+'</div>'}).join('')+'</div>';wDiv.style.display='block';}else wDiv.style.display='none';
-updateMotor(d,'');updateMotor(d,'2');
-updateLight(d,'');updateLight(d,'2');
-var mmr=parseInt(d.manual_motor_rem)||0;
-if(document.getElementById('mmT'))document.getElementById('mmT').textContent=mmr>0?'Otomatige: '+fmtMin(Math.floor(mmr/60)):'';
-var lmr=parseInt(d.manual_light_rem)||0;
-if(document.getElementById('lmT'))document.getElementById('lmT').textContent=lmr>0?'Otomatige: '+fmtMin(Math.floor(lmr/60)):'';
+uM(d,'');uM(d,'2');uL(d,'');uL(d,'2');
+var mmr=parseInt(d.manual_motor_rem)||0;document.getElementById('mmT').textContent=mmr>0?'Otomatige: '+fmtMin(Math.floor(mmr/60)):'';
+var lmr=parseInt(d.manual_light_rem)||0;document.getElementById('lmT').textContent=lmr>0?'Otomatige: '+fmtMin(Math.floor(lmr/60)):'';
 document.getElementById('wI').placeholder=parseInt(d.work_min)||3;document.getElementById('sI').placeholder=parseInt(d.stop_min)||15;
 document.getElementById('loH').placeholder=pad(parseInt(d.light_on_h)||6);document.getElementById('loM').placeholder=pad(parseInt(d.light_on_m)||0);
 document.getElementById('lfH').placeholder=pad(parseInt(d.light_off_h)||22);document.getElementById('lfM').placeholder=pad(parseInt(d.light_off_m)||0);
 document.getElementById('gI').placeholder=d.gas_threshold||400;
 var u=parseInt(d.uptime)||0;document.getElementById('up').textContent=Math.floor(u/3600)+'s '+Math.floor((u%3600)/60)+'dk';
+// Acil durdurma durumu kontrol
+var ma=parseInt(d.motor_auto)||0,la=parseInt(d.light_auto)||0;
+if(!ma&&!la&&!parseInt(d.motor_state)&&!parseInt(d.light_state)){emergStopped=true;document.getElementById('emergBtn').textContent='✅ SISTEMI GERI AC';document.getElementById('emergBtn').className='bt b9 bf';}
+else{emergStopped=false;document.getElementById('emergBtn').textContent='🛑 ACIL DURDUR';document.getElementById('emergBtn').className='bt b8 bf';}
 }).catch(function(){document.getElementById('sDot').className='sd of';document.getElementById('sTxt').textContent='Sunucu Hatasi';});}
+
+function toggleEmerg(){
+if(emergStopped){if(confirm('✅ Sistem geri acilacak.\nMotor ve isik otomatik moda donecek.\n\nEmin misiniz?')){sendCmd('mauto');setTimeout(function(){sendCmd('lauto')},500);showToast('Sistem geri acildi');}}
+else{if(confirm('⚠️ ACIL DURDURMA!\n\nTum motorlar ve isiklar kapanacak.\n5 SAAT sonra otomatige donecek.\n\nEmin misiniz?')){sendCmd('alloff');showToast('Sistem durduruldu');}}
+return false;}
 
 function loadReport(){
 fetch(API+'?action=getReport&token='+authToken).then(function(r){return r.json()}).then(function(d){
-if(d.needLogin){doLogout();return;}
-reportLoaded=true;var area=document.getElementById('reportArea');
-if(!d.days||!d.days.length){area.innerHTML='<div class="nr">Henuz rapor verisi yok. Sistem saatlik veri toplar.</div>';return;}
-var h='<div style="font-size:10px;color:var(--dim);text-align:center;margin-bottom:10px">Toplam '+d.total+' kayit</div>';
+if(d.needLogin){doLogout();return;}reportLoaded=true;var area=document.getElementById('reportArea');
+if(!d.days||!d.days.length){area.innerHTML='<div class="nr">Henuz rapor yok. Sistem saatlik kayit yapar.</div>';return;}
+var h='<div style="font-size:10px;color:var(--dim);text-align:center;margin-bottom:10px">📊 '+d.total+' kayit | Son 7 gun</div>';
 d.days.forEach(function(day){
-var parts=day.date.split('-');var dateStr=parts[2]+'/'+parts[1]+'/'+parts[0];
-h+='<div class="rp-day">';
-h+='<div class="rp-date">📅 '+dateStr+'<span>'+day.readings+' okuma</span></div>';
+var parts=day.date.split('-');var ds=parts[2]+'/'+parts[1]+'/'+parts[0];
+var wm=parseInt(day.work_min)||3,sm=parseInt(day.stop_min)||15;
+var cyclesPerHour=Math.round(60/(wm+sm));
+var expectedCycles=day.totalHours*cyclesPerHour;
+h+='<div class="rp-day"><div class="rp-date">📅 '+ds+'<span>'+day.readings+' okuma</span></div>';
 h+='<div class="rp-grid">';
 h+='<div class="rp-item"><div class="rv" style="color:var(--orange)">'+day.avgTemp+'°</div><div class="rl">Ort Sic</div></div>';
 h+='<div class="rp-item"><div class="rv" style="color:var(--cyan)">'+day.avgHum+'%</div><div class="rl">Ort Nem</div></div>';
 h+='<div class="rp-item"><div class="rv" style="color:var(--purple)">'+day.avgPPM+'</div><div class="rl">Ort PPM</div></div>';
-h+='<div class="rp-item"><div class="rv" style="color:var(--orange)">'+day.minTemp+'°</div><div class="rl">Min Sic</div></div>';
+h+='<div class="rp-item"><div class="rv" style="color:#f97316">'+day.minTemp+'°</div><div class="rl">Min Sic</div></div>';
 h+='<div class="rp-item"><div class="rv" style="color:var(--red)">'+day.maxTemp+'°</div><div class="rl">Max Sic</div></div>';
-h+='<div class="rp-item"><div class="rv" style="color:var(--green)">'+day.readings+'</div><div class="rl">Okuma</div></div>';
+h+='<div class="rp-item"><div class="rv" style="color:var(--red)">'+day.maxPPM+'</div><div class="rl">Max PPM</div></div>';
 h+='</div>';
+// Hava kalitesi
+var aqClass=day.dominantAq==='Cok Iyi'?'aq1':day.dominantAq==='Iyi'?'aq2':day.dominantAq==='Normal'?'aq3':day.dominantAq==='Kotu'?'aq4':'aq5';
+h+='<div style="text-align:center;margin-top:8px"><span class="aq '+aqClass+'">🌬️ '+day.dominantAq+'</span></div>';
+// Motor/Isik bar
 h+='<div class="rp-bar"><div class="rp-seg"><div class="rp-fill" style="width:'+day.motorOnPct+'%;background:var(--green)"></div></div><div class="rp-seg"><div class="rp-fill" style="width:'+day.lightOnPct+'%;background:var(--yellow)"></div></div></div>';
-h+='<div style="display:flex;justify-content:space-between;font-size:9px;color:var(--dim);margin-top:4px"><span>⚙️ Motor %'+day.motorOnPct+'</span><span>💡 Isik %'+day.lightOnPct+'</span></div>';
-h+='</div>';});
+h+='<div style="display:flex;justify-content:space-between;font-size:9px;color:var(--dim);margin-top:3px"><span>⚙️ Motor %'+day.motorOnPct+'</span><span>💡 Isik %'+day.lightOnPct+'</span></div>';
+// Detay
+h+='<div class="rp-extra">';
+h+='⚙️ Motor aktif: <b>'+day.motorOnHours+'/'+day.totalHours+' saat</b><br>';
+h+='💡 Isik aktif: <b>'+day.lightOnHours+'/'+day.totalHours+' saat</b><br>';
+h+='🔄 Beklenen dongu: <b>~'+expectedCycles+' kez/gun</b>';
+h+='</div></div>';});
 area.innerHTML=h;}).catch(function(){document.getElementById('reportArea').innerHTML='<div class="nr">Rapor yuklenemedi</div>';});}
 
-function sendCmd(cmd,params){var url=API+'?action=sendCmd&token='+authToken+'&cmd='+cmd;if(params)url+='&params='+encodeURIComponent(params);fetch(url).then(function(r){return r.json()}).then(function(d){if(d.needLogin){doLogout();return;}showToast(d.ok?'Komut gonderildi ✓':'Hata!');setTimeout(fetchData,1500);}).catch(function(){showToast('Baglanti hatasi')});return false}
-function allOff(){if(confirm('⚠️ TUM SISTEM KAPATILACAK!\n\nMotorlar ve isiklar kapanacak.\nManuel moda gecilecek.\n\nEmin misiniz?'))sendCmd('alloff');return false}
-function saveMotor(){var w=document.getElementById('wI'),s=document.getElementById('sI');sendCmd('setm','w='+(w.value||w.placeholder)+'&s='+(s.value||s.placeholder));w.value='';s.value='';showToast('Motor ayari kaydedildi');return false}
-function saveLight(){var oh=document.getElementById('loH'),om=document.getElementById('loM'),fh=document.getElementById('lfH'),fm=document.getElementById('lfM');sendCmd('setl','oh='+(oh.value||oh.placeholder)+'&om='+(om.value||om.placeholder)+'&fh='+(fh.value||fh.placeholder)+'&fm='+(fm.value||fm.placeholder));oh.value='';om.value='';fh.value='';fm.value='';showToast('Isik ayari kaydedildi');return false}
-function saveGas(){var g=document.getElementById('gI');sendCmd('setg','g='+(g.value||g.placeholder));g.value='';showToast('Gaz esigi kaydedildi');return false}
+function sendCmd(cmd,params){var url=API+'?action=sendCmd&token='+authToken+'&cmd='+cmd;if(params)url+='&params='+encodeURIComponent(params);fetch(url).then(function(r){return r.json()}).then(function(d){if(d.needLogin){doLogout();return;}showToast(d.ok?'✓ Gonderildi':'Hata!');setTimeout(fetchData,1500);}).catch(function(){showToast('Baglanti hatasi')});return false}
+function saveMotor(){var w=document.getElementById('wI'),s=document.getElementById('sI');sendCmd('setm','w='+(w.value||w.placeholder)+'&s='+(s.value||s.placeholder));w.value='';s.value='';return false}
+function saveLight(){var oh=document.getElementById('loH'),om=document.getElementById('loM'),fh=document.getElementById('lfH'),fm=document.getElementById('lfM');sendCmd('setl','oh='+(oh.value||oh.placeholder)+'&om='+(om.value||om.placeholder)+'&fh='+(fh.value||fh.placeholder)+'&fm='+(fm.value||fm.placeholder));oh.value='';om.value='';fh.value='';fm.value='';return false}
+function saveGas(){var g=document.getElementById('gI');sendCmd('setg','g='+(g.value||g.placeholder));g.value='';return false}
 function showToast(m){var t=document.getElementById('tst');t.textContent=m;t.classList.add('sh');setTimeout(function(){t.classList.remove('sh')},2500)}
-function startApp(){fetchData();fetchTimer=setInterval(fetchData,3000);}
+function startApp(){fetchData();fetchTimer=setInterval(fetchData,2000);}
 </script></body></html>
