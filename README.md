@@ -1,1 +1,0 @@
-# teknolojik-tarim
