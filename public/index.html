@@ -226,3 +226,105 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 </div>
 </div></div>
 <div class="to" id="tst"></div>
+<script>
+var API='/api',fetchTimer=null,authToken='',reportLoaded=false;
+function doLogin(){var pw=document.getElementById('pwInput').value;fetch(API+'?action=login&pw='+encodeURIComponent(pw)).then(function(r){return r.json()}).then(function(d){if(d.ok&&d.token){authToken=d.token;localStorage.setItem('ttoken',d.token);document.getElementById('loginWrap').style.display='none';document.getElementById('mainWrap').style.display='block';document.getElementById('loginErr').style.display='none';document.getElementById('pwInput').value='';startApp();}else{document.getElementById('loginErr').style.display='block';}}).catch(function(){document.getElementById('loginErr').style.display='block';});}
+function doLogout(){authToken='';localStorage.removeItem('ttoken');if(fetchTimer)clearInterval(fetchTimer);document.getElementById('mainWrap').style.display='none';document.getElementById('loginWrap').style.display='flex';document.getElementById('pwInput').value='';}
+document.getElementById('pwInput').addEventListener('keydown',function(e){if(e.key==='Enter')doLogin()});
+var savedToken=localStorage.getItem('ttoken');
+if(savedToken){authToken=savedToken;fetch(API+'?action=getData&token='+savedToken).then(function(r){return r.json()}).then(function(d){if(d.needLogin)doLogout();else{document.getElementById('loginWrap').style.display='none';document.getElementById('mainWrap').style.display='block';startApp();}}).catch(function(){doLogout();});}
+
+var PL=[{n:"Yesil Marul",p:"5.5-6.5",e:"0.8-1.2",l:"12-16",t:"15-22",i:"Serin sever. Kolay yetisir"},{n:"Kirmizi Marul",p:"5.5-6.5",e:"0.8-1.2",l:"14-16",t:"15-22",i:"Isik onemli"},{n:"Roka",p:"6.0-7.0",e:"0.8-1.4",l:"10-14",t:"15-20",i:"Hizli buyur"},{n:"Maydanoz",p:"5.5-6.5",e:"0.8-1.8",l:"12-16",t:"15-25",i:"Yavas cimlenir"},{n:"Nane",p:"5.5-6.5",e:"2.0-2.4",l:"12-16",t:"15-25",i:"Hizli yayilir"},{n:"Feslegen",p:"5.5-6.5",e:"1.0-1.6",l:"14-18",t:"20-30",i:"Sicak sever"},{n:"Dereotu",p:"5.5-6.5",e:"1.0-1.6",l:"12-14",t:"15-25",i:"Hizli buyur"},{n:"Tere",p:"6.0-6.5",e:"0.8-1.2",l:"12-16",t:"10-20",i:"10 gunde hasat!"},{n:"Kekik",p:"5.5-7.0",e:"0.8-1.6",l:"12-16",t:"15-25",i:"Dayanikli"},{n:"Ispanak",p:"5.5-6.5",e:"1.8-2.3",l:"10-14",t:"10-20",i:"Serin sever"},{n:"Cherry Domates",p:"5.5-6.5",e:"2.0-3.5",l:"14-18",t:"20-30",i:"Cok isik ister"},{n:"Tatli Biber",p:"5.5-6.5",e:"1.8-2.5",l:"14-18",t:"20-28",i:"Sicak sever"},{n:"Salatalik",p:"5.5-6.0",e:"1.7-2.5",l:"14-18",t:"20-28",i:"Hizli buyur"},{n:"Cilek",p:"5.5-6.2",e:"1.0-1.5",l:"12-16",t:"15-25",i:"Tozlasma gerek"},{n:"Turp",p:"6.0-7.0",e:"1.6-2.2",l:"10-14",t:"10-18",i:"3 haftada hasat!"},{n:"Brokoli",p:"6.0-6.5",e:"2.8-3.5",l:"14-18",t:"15-20",i:"Serin ortam"},{n:"Sogan Yesili",p:"6.0-7.0",e:"1.4-1.8",l:"12-14",t:"15-25",i:"En kolay"},{n:"Pazi",p:"6.0-6.5",e:"1.8-2.3",l:"12-16",t:"15-25",i:"Dayanikli"},{n:"Lahana",p:"6.0-7.0",e:"2.5-3.0",l:"12-16",t:"12-20",i:"Serin iklim"},{n:"Biberiye",p:"5.5-6.5",e:"1.0-1.6",l:"14-18",t:"15-25",i:"Uzun omurlu"}];
+var selPlants=JSON.parse(localStorage.getItem('sp')||'[]');
+function renderPlants(li){var h='';if(!li.length)h='<div class="nr">Bulunamadi</div>';else for(var i=0;i<li.length;i++){var x=li[i],idx=PL.indexOf(x),isSel=selPlants.indexOf(idx)>=0;h+='<div class="pc'+(isSel?' sel':'')+'" onclick="togglePlant('+idx+')">';if(isSel)h+='<span class="sel-badge">SECILI ✓</span>';h+='<div class="pn">🌱 '+x.n+'</div><div class="pg"><div class="pv">pH:<span>'+x.p+'</span></div><div class="pv">EC:<span>'+x.e+'</span></div><div class="pv">Isik:<span>'+x.l+'s</span></div><div class="pv">Sic:<span>'+x.t+'°C</span></div></div><div class="pi">💡 '+x.i+'</div></div>';}document.getElementById('pL').innerHTML=h;updateSelInfo();}
+function togglePlant(idx){var pos=selPlants.indexOf(idx);if(pos>=0)selPlants.splice(pos,1);else{if(selPlants.length>=4){showToast('En fazla 4 bitki!');return;}selPlants.push(idx);}localStorage.setItem('sp',JSON.stringify(selPlants));filterPlants();}
+function updateSelInfo(){var info=document.getElementById('selInfo');if(!selPlants.length)info.textContent='Panelde uyari almak icin bitkilere dokunarak sec (max 4)';else{var n=[];for(var i=0;i<selPlants.length;i++)n.push(PL[selPlants[i]].n);info.textContent='Secili ('+selPlants.length+'/4): '+n.join(', ');}}
+function filterPlants(){var q=document.getElementById('sBox').value.toLowerCase();if(!q){renderPlants(PL);return;}var r=[];for(var i=0;i<PL.length;i++)if(PL[i].n.toLowerCase().indexOf(q)>=0)r.push(PL[i]);renderPlants(r);}
+renderPlants(PL);
+function showTab(n){var ts=document.querySelectorAll('.ti'),cs=document.querySelectorAll('.tc');for(var i=0;i<ts.length;i++){ts[i].classList.remove('a');cs[i].classList.remove('a');}ts[n].classList.add('a');cs[n].classList.add('a');if(n===3&&!reportLoaded)loadReport();}
+function pad(n){return n<10?'0'+n:''+n}
+function fmtMin(m){var h=Math.floor(m/60),mn=m%60;return h>0?h+'s '+mn+'dk':mn+'dk'}
+function fmtAgo(s){if(s<60)return s+'sn';if(s<3600)return Math.floor(s/60)+'dk';return Math.floor(s/3600)+'sa '+Math.floor((s%3600)/60)+'dk'}
+function checkWarnings(d){var w=[];for(var i=0;i<selPlants.length;i++){var p=PL[selPlants[i]];if(!p)continue;var tr=p.t.split('-');if(d.temp<parseFloat(tr[0]))w.push('⚠️ '+p.n+': Sicaklik dusuk! (min '+tr[0]+'°C)');if(d.temp>parseFloat(tr[1]))w.push('🔥 '+p.n+': Sicaklik yuksek! (max '+tr[1]+'°C)');if(d.hum<30)w.push('💧 '+p.n+': Nem dusuk!');if(d.hum>85)w.push('💧 '+p.n+': Nem yuksek!');}return w;}
+function updateMotor(d,sfx){
+var mot=parseInt(d.motor_state)||0,ma=parseInt(d.motor_auto)||0,mr=parseInt(d.motor_remaining)||0,wm=parseInt(d.work_min)||3,sm=parseInt(d.stop_min)||15;
+var e=function(id){return document.getElementById(id+sfx)};
+if(e('mR'))e('mR').textContent=fmtMin(Math.floor(mr/60));
+if(mot){if(e('mBx'))e('mBx').className='bx r';if(e('mI'))e('mI').className='mi r';if(e('mT')){e('mT').className='mt r';e('mT').textContent='MOTOR CALISIYOR';}if(e('mP'))e('mP').className='pf r';if(e('mL'))e('mL').textContent='Kapanmaya';if(e('mP'))e('mP').style.width=Math.max(0,((wm*60-mr)/(wm*60))*100)+'%';}
+else{if(e('mBx'))e('mBx').className='bx s';if(e('mI'))e('mI').className='mi s';if(e('mT')){e('mT').className='mt s';e('mT').textContent='MOTOR DURDU';}if(e('mP'))e('mP').className='pf s';if(e('mL'))e('mL').textContent='Acilmaya';if(e('mP'))e('mP').style.width=Math.max(0,((sm*60-mr)/(sm*60))*100)+'%';}
+if(ma){if(e('mBd'))e('mBd').className='mb au';if(e('mBd'))e('mBd').textContent='OTO';if(e('maB')){e('maB').textContent='🖐 Manuel';e('maB').className='bt b4 bf';}}
+else{if(e('mBd'))e('mBd').className='mb mn';if(e('mBd'))e('mBd').textContent='MANUEL';if(e('maB')){e('maB').textContent='🔄 Otomatik';e('maB').className='bt b3 bf';}}}
+function updateLight(d,sfx){
+var lit=parseInt(d.light_state)||0,la=parseInt(d.light_auto)||0,lr=parseInt(d.light_remaining)||0;
+var e=function(id){return document.getElementById(id+sfx)};
+if(e('lR'))e('lR').textContent=fmtMin(lr);
+if(e('lOn'))e('lOn').textContent=pad(parseInt(d.light_on_h)||6)+':'+pad(parseInt(d.light_on_m)||0);
+if(e('lOf'))e('lOf').textContent=pad(parseInt(d.light_off_h)||22)+':'+pad(parseInt(d.light_off_m)||0);
+if(lit){if(e('lBx'))e('lBx').className='bx lo';if(e('lI'))e('lI').className='mi lo';if(e('lT')){e('lT').className='mt lo';e('lT').textContent='ISIK ACIK';}if(e('lP'))e('lP').className='pf lo';if(e('lL'))e('lL').textContent='Kapanmaya';}
+else{if(e('lBx'))e('lBx').className='bx lf';if(e('lI'))e('lI').className='mi lf';if(e('lT')){e('lT').className='mt lf';e('lT').textContent='ISIK KAPALI';}if(e('lP'))e('lP').className='pf lf';if(e('lL'))e('lL').textContent='Acilmaya';}
+if(la){if(e('lBd'))e('lBd').className='mb au';if(e('lBd'))e('lBd').textContent='OTO';if(e('laB')){e('laB').textContent='🖐 Manuel';e('laB').className='bt b4 bf';}}
+else{if(e('lBd'))e('lBd').className='mb mn';if(e('lBd'))e('lBd').textContent='MANUEL';if(e('laB')){e('laB').textContent='🔄 Otomatik';e('laB').className='bt b3 bf';}}}
+
+function fetchData(){
+fetch(API+'?action=getData&token='+authToken+'&_='+Date.now()).then(function(r){return r.json()}).then(function(d){
+if(d.needLogin){doLogout();return;}if(d.error)return;
+var online=parseInt(d.online)||0,ago=parseInt(d.ago)||0;
+document.getElementById('sDot').className='sd '+(online?'on':'of');
+document.getElementById('sTxt').textContent=online?'Bagli':'Cevrimdisi';
+document.getElementById('offBanner').style.display=online?'none':'block';
+if(!online)document.getElementById('lastUp').textContent=fmtAgo(ago)+' once';
+document.getElementById('clk').textContent=d.clock_time||'--:--:--';
+var temp=parseFloat(d.temp)||0,hum=parseFloat(d.hum)||0,ppmV=parseFloat(d.ppm)||0;
+document.getElementById('tmp').textContent=temp.toFixed(1);document.getElementById('hum').textContent=hum.toFixed(1);
+document.getElementById('gR').textContent=d.gas||0;document.getElementById('ppm').textContent=Math.round(ppmV);
+var aq=d.air_quality||'--',ab=document.getElementById('aB');ab.textContent=aq;ab.className='aq';
+ab.classList.add(aq==='Cok Iyi'?'aq1':aq==='Iyi'?'aq2':aq==='Normal'?'aq3':aq==='Kotu'?'aq4':'aq5');
+var gb=document.getElementById('gBar');gb.style.width=Math.min((ppmV/1000)*100,100)+'%';
+gb.style.background=ppmV<200?'#22c55e':ppmV<400?'#fbbf24':ppmV<600?'#fb923c':'#ef4444';
+parseInt(d.gas_alarm)?document.getElementById('gC').classList.add('al'):document.getElementById('gC').classList.remove('al');
+var w=checkWarnings({temp:temp,hum:hum}),wDiv=document.getElementById('warns');
+if(w.length){wDiv.innerHTML='<div class="wn">'+w.map(function(x){return'<div class="wn-item">'+x+'</div>'}).join('')+'</div>';wDiv.style.display='block';}else wDiv.style.display='none';
+updateMotor(d,'');updateMotor(d,'2');
+updateLight(d,'');updateLight(d,'2');
+var mmr=parseInt(d.manual_motor_rem)||0;
+if(document.getElementById('mmT'))document.getElementById('mmT').textContent=mmr>0?'Otomatige: '+fmtMin(Math.floor(mmr/60)):'';
+var lmr=parseInt(d.manual_light_rem)||0;
+if(document.getElementById('lmT'))document.getElementById('lmT').textContent=lmr>0?'Otomatige: '+fmtMin(Math.floor(lmr/60)):'';
+document.getElementById('wI').placeholder=parseInt(d.work_min)||3;document.getElementById('sI').placeholder=parseInt(d.stop_min)||15;
+document.getElementById('loH').placeholder=pad(parseInt(d.light_on_h)||6);document.getElementById('loM').placeholder=pad(parseInt(d.light_on_m)||0);
+document.getElementById('lfH').placeholder=pad(parseInt(d.light_off_h)||22);document.getElementById('lfM').placeholder=pad(parseInt(d.light_off_m)||0);
+document.getElementById('gI').placeholder=d.gas_threshold||400;
+var u=parseInt(d.uptime)||0;document.getElementById('up').textContent=Math.floor(u/3600)+'s '+Math.floor((u%3600)/60)+'dk';
+}).catch(function(){document.getElementById('sDot').className='sd of';document.getElementById('sTxt').textContent='Sunucu Hatasi';});}
+
+function loadReport(){
+fetch(API+'?action=getReport&token='+authToken).then(function(r){return r.json()}).then(function(d){
+if(d.needLogin){doLogout();return;}
+reportLoaded=true;var area=document.getElementById('reportArea');
+if(!d.days||!d.days.length){area.innerHTML='<div class="nr">Henuz rapor verisi yok. Sistem saatlik veri toplar.</div>';return;}
+var h='<div style="font-size:10px;color:var(--dim);text-align:center;margin-bottom:10px">Toplam '+d.total+' kayit</div>';
+d.days.forEach(function(day){
+var parts=day.date.split('-');var dateStr=parts[2]+'/'+parts[1]+'/'+parts[0];
+h+='<div class="rp-day">';
+h+='<div class="rp-date">📅 '+dateStr+'<span>'+day.readings+' okuma</span></div>';
+h+='<div class="rp-grid">';
+h+='<div class="rp-item"><div class="rv" style="color:var(--orange)">'+day.avgTemp+'°</div><div class="rl">Ort Sic</div></div>';
+h+='<div class="rp-item"><div class="rv" style="color:var(--cyan)">'+day.avgHum+'%</div><div class="rl">Ort Nem</div></div>';
+h+='<div class="rp-item"><div class="rv" style="color:var(--purple)">'+day.avgPPM+'</div><div class="rl">Ort PPM</div></div>';
+h+='<div class="rp-item"><div class="rv" style="color:var(--orange)">'+day.minTemp+'°</div><div class="rl">Min Sic</div></div>';
+h+='<div class="rp-item"><div class="rv" style="color:var(--red)">'+day.maxTemp+'°</div><div class="rl">Max Sic</div></div>';
+h+='<div class="rp-item"><div class="rv" style="color:var(--green)">'+day.readings+'</div><div class="rl">Okuma</div></div>';
+h+='</div>';
+h+='<div class="rp-bar"><div class="rp-seg"><div class="rp-fill" style="width:'+day.motorOnPct+'%;background:var(--green)"></div></div><div class="rp-seg"><div class="rp-fill" style="width:'+day.lightOnPct+'%;background:var(--yellow)"></div></div></div>';
+h+='<div style="display:flex;justify-content:space-between;font-size:9px;color:var(--dim);margin-top:4px"><span>⚙️ Motor %'+day.motorOnPct+'</span><span>💡 Isik %'+day.lightOnPct+'</span></div>';
+h+='</div>';});
+area.innerHTML=h;}).catch(function(){document.getElementById('reportArea').innerHTML='<div class="nr">Rapor yuklenemedi</div>';});}
+
+function sendCmd(cmd,params){var url=API+'?action=sendCmd&token='+authToken+'&cmd='+cmd;if(params)url+='&params='+encodeURIComponent(params);fetch(url).then(function(r){return r.json()}).then(function(d){if(d.needLogin){doLogout();return;}showToast(d.ok?'Komut gonderildi ✓':'Hata!');setTimeout(fetchData,1500);}).catch(function(){showToast('Baglanti hatasi')});return false}
+function allOff(){if(confirm('⚠️ TUM SISTEM KAPATILACAK!\n\nMotorlar ve isiklar kapanacak.\nManuel moda gecilecek.\n\nEmin misiniz?'))sendCmd('alloff');return false}
+function saveMotor(){var w=document.getElementById('wI'),s=document.getElementById('sI');sendCmd('setm','w='+(w.value||w.placeholder)+'&s='+(s.value||s.placeholder));w.value='';s.value='';showToast('Motor ayari kaydedildi');return false}
+function saveLight(){var oh=document.getElementById('loH'),om=document.getElementById('loM'),fh=document.getElementById('lfH'),fm=document.getElementById('lfM');sendCmd('setl','oh='+(oh.value||oh.placeholder)+'&om='+(om.value||om.placeholder)+'&fh='+(fh.value||fh.placeholder)+'&fm='+(fm.value||fm.placeholder));oh.value='';om.value='';fh.value='';fm.value='';showToast('Isik ayari kaydedildi');return false}
+function saveGas(){var g=document.getElementById('gI');sendCmd('setg','g='+(g.value||g.placeholder));g.value='';showToast('Gaz esigi kaydedildi');return false}
+function showToast(m){var t=document.getElementById('tst');t.textContent=m;t.classList.add('sh');setTimeout(function(){t.classList.remove('sh')},2500)}
+function startApp(){fetchData();fetchTimer=setInterval(fetchData,3000);}
+</script></body></html>
