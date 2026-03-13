@@ -1,9 +1,12 @@
 const express = require("express");
 const fs = require("fs");
 const path = require("path");
+const crypto = require("crypto");
 const app = express();
 const PORT = process.env.PORT || 3000;
 const API_KEY = "tarim2024gizli";
+const LOGIN_PASS = "00990099";
+const tokens = new Set();
 
 const DATA_DIR = path.join(__dirname, "data");
 const SF = path.join(DATA_DIR, "sensor.json");
@@ -36,10 +39,34 @@ function handleAPI(req, res) {
   const action = gp(req, "action") || "";
   const key = gp(req, "key") || "";
 
+  // LOGIN - sifre kontrolu sunucuda
+  if (action === "login") {
+    const pw = gp(req, "pw") || "";
+    if (pw === LOGIN_PASS) {
+      const token = crypto.randomBytes(16).toString("hex");
+      tokens.add(token);
+      // Max 50 token tut
+      if (tokens.size > 50) {
+        const first = tokens.values().next().value;
+        tokens.delete(first);
+      }
+      return res.json({ ok: true, token: token });
+    }
+    return res.json({ error: "Yanlis sifre" });
+  }
+
+  // TOKEN KONTROL - getData ve sendCmd icin
+  if (action === "getData" || action === "sendCmd") {
+    const token = gp(req, "token") || "";
+    if (!tokens.has(token)) {
+      return res.json({ error: "Yetkisiz", needLogin: true });
+    }
+  }
+
   if (action === "update") {
     if (key !== API_KEY) return res.json({ error: "Yetkisiz" });
     let data = readJ(SF, {});
-       const map = {
+    const map = {
       t:"temp",h:"hum",g:"gas",p:"ppm",ms:"motor_state",ls:"light_state",
       ma:"motor_auto",la:"light_auto",mr:"motor_remaining",lr:"light_remaining",
       wm:"work_min",sm:"stop_min",loh:"light_on_h",lom:"light_on_m",
@@ -65,6 +92,8 @@ function handleAPI(req, res) {
       const v = gp(req, s);
       if (v !== null) data[l] = v;
     }
+    // air_quality underscore duzelt
+    if (data.air_quality) data.air_quality = data.air_quality.replace(/_/g, " ");
     data.last_update = Date.now();
     fs.writeFileSync(SF, JSON.stringify(data));
     let cmds = readJ(CF, []);
@@ -102,7 +131,7 @@ function handleAPI(req, res) {
     return res.json({ ok: true });
   }
 
-  return res.json({ status: "Teknolojik Tarim API", ver: "2.0" });
+  return res.json({ status: "Teknolojik Tarim API", ver: "2.1" });
 }
 
 app.all("/api", handleAPI);
