@@ -11,10 +11,12 @@ const tokens = new Set();
 const DATA_DIR = path.join(__dirname, "data");
 const SF = path.join(DATA_DIR, "sensor.json");
 const CF = path.join(DATA_DIR, "commands.json");
+const RF = path.join(DATA_DIR, "reports.json");
 
 if (!fs.existsSync(DATA_DIR)) fs.mkdirSync(DATA_DIR, { recursive: true });
 if (!fs.existsSync(SF)) fs.writeFileSync(SF, "{}");
 if (!fs.existsSync(CF)) fs.writeFileSync(CF, "[]");
+if (!fs.existsSync(RF)) fs.writeFileSync(RF, "[]");
 
 app.use(express.static("public"));
 app.use(express.urlencoded({ extended: true }));
@@ -35,32 +37,53 @@ function readJ(f, fb) {
   catch (e) { return fb; }
 }
 
+// Saatlik rapor kaydet
+let lastReportHour = -1;
+function saveReport(data) {
+  const now = new Date();
+  const currentHour = now.getUTCHours();
+  if (currentHour === lastReportHour) return;
+  lastReportHour = currentHour;
+
+  let reports = readJ(RF, []);
+  reports.push({
+    ts: Date.now(),
+    date: now.toISOString().slice(0, 16),
+    t: parseFloat(data.temp) || 0,
+    h: parseFloat(data.hum) || 0,
+    p: parseFloat(data.ppm) || 0,
+    g: parseInt(data.gas) || 0,
+    ms: parseInt(data.motor_state) || 0,
+    ls: parseInt(data.light_state) || 0,
+    aq: data.air_quality || "Iyi"
+  });
+
+  // 7 gun = 168 saat, fazlasini sil
+  const sevenDaysAgo = Date.now() - (7 * 24 * 60 * 60 * 1000);
+  reports = reports.filter(r => r.ts > sevenDaysAgo);
+  if (reports.length > 168) reports = reports.slice(-168);
+
+  fs.writeFileSync(RF, JSON.stringify(reports));
+}
+
 function handleAPI(req, res) {
   const action = gp(req, "action") || "";
   const key = gp(req, "key") || "";
 
-  // LOGIN - sifre kontrolu sunucuda
   if (action === "login") {
     const pw = gp(req, "pw") || "";
     if (pw === LOGIN_PASS) {
       const token = crypto.randomBytes(16).toString("hex");
       tokens.add(token);
-      // Max 50 token tut
-      if (tokens.size > 50) {
-        const first = tokens.values().next().value;
-        tokens.delete(first);
-      }
-      return res.json({ ok: true, token: token });
+      if (tokens.size > 50) tokens.delete(tokens.values().next().value);
+      return res.json({ ok: true, token });
     }
     return res.json({ error: "Yanlis sifre" });
   }
 
-  // TOKEN KONTROL - getData ve sendCmd icin
-  if (action === "getData" || action === "sendCmd") {
+  if (["getData", "sendCmd", "getReport"].includes(action)) {
     const token = gp(req, "token") || "";
-    if (!tokens.has(token)) {
-      return res.json({ error: "Yetkisiz", needLogin: true });
-    }
+    if (!tokens.has(token)) return res.json({ error: "Yetkisiz", needLogin: true });
   }
 
   if (action === "update") {
@@ -70,11 +93,9 @@ function handleAPI(req, res) {
       t:"temp",h:"hum",g:"gas",p:"ppm",ms:"motor_state",ls:"light_state",
       ma:"motor_auto",la:"light_auto",mr:"motor_remaining",lr:"light_remaining",
       wm:"work_min",sm:"stop_min",loh:"light_on_h",lom:"light_on_m",
-      lfh:"light_off_h",lfm:"light_off_m",
-      gt:"gas_threshold",gth:"gas_threshold",
-      aq:"air_quality",
-      ga:"gas_alarm",ns:"ntp_synced",ct:"clock_time",up:"uptime",
-      cl:"calibrated",mmr:"manual_motor_rem",lmr:"manual_light_rem",
+      lfh:"light_off_h",lfm:"light_off_m",gt:"gas_threshold",gth:"gas_threshold",
+      aq:"air_quality",ga:"gas_alarm",ns:"ntp_synced",ct:"clock_time",
+      up:"uptime",cl:"calibrated",mmr:"manual_motor_rem",lmr:"manual_light_rem",
       temp:"temp",hum:"hum",gas:"gas",ppm:"ppm",
       motor_state:"motor_state",light_state:"light_state",
       motor_auto:"motor_auto",light_auto:"light_auto",
@@ -92,13 +113,16 @@ function handleAPI(req, res) {
       const v = gp(req, s);
       if (v !== null) data[l] = v;
     }
-    // air_quality underscore duzelt
     if (data.air_quality) data.air_quality = data.air_quality.replace(/_/g, " ");
     data.last_update = Date.now();
     fs.writeFileSync(SF, JSON.stringify(data));
+
+    // Saatlik rapor kaydet
+    try { saveReport(data); } catch(e) {}
+
     let cmds = readJ(CF, []);
     if (cmds.length > 0) fs.writeFileSync(CF, "[]");
-    return res.json({ ok: true, cmds: cmds });
+    return res.json({ ok: true, cmds });
   }
 
   if (action === "getData") {
@@ -131,7 +155,39 @@ function handleAPI(req, res) {
     return res.json({ ok: true });
   }
 
-  return res.json({ status: "Teknolojik Tarim API", ver: "2.1" });
+  if (action === "getReport") {
+    const reports = readJ(RF, []);
+    // Gunluk ozet olustur
+    const days = {};
+    reports.forEach(r => {
+      const day = new Date(r.ts).toISOString().slice(0, 10);
+      if (!days[day]) days[day] = { temps: [], hums: [], ppms: [], motorOn: 0, lightOn: 0, count: 0, entries: [] };
+      days[day].temps.push(r.t);
+      days[day].hums.push(r.h);
+      days[day].ppms.push(r.p);
+      if (r.ms) days[day].motorOn++;
+      if (r.ls) days[day].lightOn++;
+      days[day].count++;
+      days[day].entries.push(r);
+    });
+
+    const summary = Object.entries(days).map(([date, d]) => ({
+      date,
+      avgTemp: (d.temps.reduce((a, b) => a + b, 0) / d.temps.length).toFixed(1),
+      minTemp: Math.min(...d.temps).toFixed(1),
+      maxTemp: Math.max(...d.temps).toFixed(1),
+      avgHum: (d.hums.reduce((a, b) => a + b, 0) / d.hums.length).toFixed(1),
+      avgPPM: Math.round(d.ppms.reduce((a, b) => a + b, 0) / d.ppms.length),
+      motorOnPct: Math.round((d.motorOn / d.count) * 100),
+      lightOnPct: Math.round((d.lightOn / d.count) * 100),
+      readings: d.count,
+      entries: d.entries
+    })).sort((a, b) => b.date.localeCompare(a.date));
+
+    return res.json({ ok: true, days: summary, total: reports.length });
+  }
+
+  return res.json({ status: "Teknolojik Tarim API", ver: "3.0" });
 }
 
 app.all("/api", handleAPI);
